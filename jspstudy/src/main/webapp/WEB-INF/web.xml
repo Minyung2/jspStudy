@@ -14,6 +14,22 @@
   	<param-name>INIT_PARAM</param-name>
   	<param-value>배포 서술자에 저장된 초기화 매개 변수</param-value>
   </context-param>
+  <context-param>
+  	<param-name>OracleDriver</param-name>
+  	<param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>OracleUrl</param-name>
+  	<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>OracleId</param-name>
+  	<param-value>min</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>OraclePw</param-name>
+  	<param-value>1234</param-value>
+  </context-param>
   
   <error-page>
   	<error-code>404</error-code>
