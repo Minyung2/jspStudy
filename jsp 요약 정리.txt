@@ -1,0 +1,235 @@
+JSP란?
+Java Server Page
+동적 페이지를 제공하기 위해 만들어진 툴
+또는 자바 코드 이용가능한 동적 페이지
+
+Servlet
+웹 서버 내에 존재하는 작은 자바 프로그램
+
+Container
+웹페이지 기능구현을 위해 존재하는 
+소프트웨어 묶음
+
+Cookie vs Session
+쿠키와 세션은 클라이언트의 정보를 유지하는 것에
+목적은 같으나
+저장되는 위치가 다르다
+쿠키는 클라이언트 로컬 영역 내에 저장되며
+세션은 웹 서버 컴퓨터에 저장되는 정보이다.
+
+(알아도 그만 몰라도 그만..)>> Rest 원칙
+인터페이스 일관성 : 일관적인 인터페이스로 분리되어야 한다
+무상태(Stateless): 각 요청 간 클라이언트의 콘텍스트가 서버에 저장되어서는 안 된다
+캐시 처리 가능(Cacheable): WWW에서와 같이 클라이언트는 응답을 캐싱할 수 있어야 한다.
+잘 관리되는 캐싱은 클라이언트-서버 간 상호작용을 
+부분적으로 또는 완전하게 제거하여 scalability와 성능을 향상시킨다.
+계층화(Layered System): 클라이언트는 보통 대상 서버에 직접 연결되었는지, 
+또는 중간 서버를 통해 연결되었는지를 알 수 없다. 
+중간 서버는 로드 밸런싱 기능이나 공유 캐시 기능을 제공함으로써 
+시스템 규모 확장성을 향상시키는 데 유용하다.
+Code on demand (optional) - 자바 애플릿이나 자바스크립트의 제공을 
+통해 서버가 클라이언트가 실행시킬 수 있는 로직을 전송하여 기능을 
+확장시킬 수 있다.
+클라이언트/서버 구조 : 아키텍처를 단순화시키고 작은 단위로 
+분리(decouple)함으로써 클라이언트-서버의 각 파트가 독립적으로 
+개선될 수 있도록 해준다..
+
+위의 REST원칙을 지키는 것을 RESTful이라고 한다.
+RESTful API >>REST 원칙을 지키는 API
+
+
+Scope(데이터의 유효범위)
+page < request < session < application
+
+page는 따로 객체가 없으며 pageContext가 역할을 대신함
+리턴 Object 객체 형변환 필요
+
+request 데이터 지정 페이지+
+ 포워딩을 할 시 전달한 페이지까지 유효한 객체(포워딩 필수)
+
+request.getParameter >>String 리턴 형변환 필요 x
+
+
+session 어플리케이션이 켜질 때부터 꺼질 때까지 유효
+리턴 Object 객체 형변환 필요
+
+application 어플리케이션이 켜질 때부터 꺼질 때까지 유효
+리턴 Object 객체 형변환 필요
+
+단 Application은 범위가 가장 넓지만 남용 금지
+클라이언트가 수정할 필요가 없는 데이터들을 지정할 시 유용함
+남용시 데이터 충돌 가능성 농후하다.
+
+
+
+템플릿 데이터
+->클라이언트로 출력되는 콘텐츠
+
+<%! %>
+선언 태그
+멤버 변수나 메소드 선언 필요하면 사용가능하나 권장x
+그닥 쓸 일 읎음
+
+<%= %>
+표현 태그
+웹 브라우저를 통해 out.println()의 인자로 적합한 모든 자바 코드가 가능하다.
+사칙연산,메소드 호출,변숫값 출력 시 사용
+
+사용처 간단히 HTML 중간중간에 값 넣어줄때 사용
+
+<% %>
+HTML 중간에 섞어 사용하는 것도 가능
+JSTL+EL로 대체 가능
+모든 자바 코드 사용가능
+
+
+Standard Action Tag(표준 액션 태그)
+JSP 페이지에서 자바 코드 등의 스크립트 언어를 
+사용하지 않고도(즉, HTML 태그 형태로) 
+다른 페이지의 서블릿이나 자바빈의 객체에 접근할 수 있도록 
+태그를 이용해 구현된 기능
+
+jsp:forward
+request,response 객체를 포함하여 다른페이지로 포워딩 시킴
+
+일반화
+<jsp:forward page="(경로)"/>
+
+
+jsp:include
+다른 페이지의 실행 결과를 포함시킴 
+속성들
+page: 표기할 페이지 경로
+
+flush:버퍼에 저장하고 즉시 클라이언트에게 전송
+(처리 데이터 양이 적을 때만 사용권장)
+default >>  false
+
+errorPage: 
+표기할 페이지에서 오류가 발생할 경우 
+띄울 페이지 경로
+default >> 웹브라우저 기본 오류페이지
+
+일반 식 flush,errorPage는 기입 안해도 작동
+<jsp:include page="(경로)"  flush="(true/false)" errorPage="(경로)"/>
+
+
+
+자바 빈즈? >>
+JSP 기반 웹 어플리케이션에서 정보를 표현하기 위한 객체
+밑의 useBean 액션태그를 사용 시 
+
+jsp:useBean
+자바 빈즈 객체를 생성 or 호출 
+
+사용가능한 속성
+
+id: 객체를 참조할 이름(비슷한 의미: 변수명)
+class: 참조할 클래스 경로
+scope: 객체를 할당할 영역(앞서 배운 4가지 scope!)
+
+ex) 
+<jsp:useBean id="person" class="common.Person scope="session" "/>
+common.Person 클래스로 만든 객체인 person을 session 영역에 할당한다는 의미 
+
+jsp:setProperty 
+자바 빈즈 객체의 속성에 값을 할당 
+
+
+사용가능한 속성
+
+name:객체명(jsp:useBean에서 지정한 id)
+property:객체의 필드 이름
+value: property에 대응되는 값
+
+
+ex)
+<jsp:setProperty name:person property="name" value="kong" "/>
+
+
+
+jsp:getProperty 
+자바 빈즈 객체의 속성의 값을 호출
+
+name:객체명(jsp:useBean에서 지정한 id)
+property: 객체의 필드 이름
+
+
+ex)
+<jsp:setProperty name:person property="name" "/>
+
+
+
+jsp:param
+jsp:forward, jsp:include 태그 안에 포함 시켜 같이 쓰며 
+페이지 이동 또는 표현 시 해당 데이터를 목표 페이지(이동/표현)로
+보내주고 처리
+전달 받은 페이지에서는 
+request 객체를 통해 받을 수 있음
+
+ex)
+<jsp:forward page="publicNumber.jsp">
+	<jsp:param value="112" name="police"/>
+	<jsp:param value="119" name="fireFighter"/>
+</jsp:forward>
+
+
+<jsp:include page="publicNumber.jsp">
+	<jsp:param value="112" name="police"/>
+	<jsp:param value="119" name="fireFighter"/>
+</jsp:include>
+
+
+
+
+EL(Expression Language)
+JSP에서 자바코드를 더욱 간결하게 하기 위해 만든 언어이다.
+
+--EL을 통해 가독성을 높이는 것이 목적--
+
+산술 연산자(+, -, *, /, %)
+관계 연산자(>, >=, <, <=, ==, !=)
+논리 연산자(and, or, not)
+Empty 연산자(empty, not empty)
+조건 연산자(? :)
+EL에서는 다음과 같은 객체에 접근할 수 있습니다.
+
+pageScope: JSP 페이지 내에서 지역적으로 선언된 변수
+requestScope: 현재 요청에 대한 정보를 담고 있는 객체
+sessionScope: 현재 세션에 대한 정보를 담고 있는 객체
+applicationScope: 현재 어플리케이션에 대한 정보를 담고 있는 객체
+param: 요청 파라미터
+paramValues: 요청 파라미터의 배열
+header: 요청 헤더
+headerValues: 요청 헤더의 배열
+cookie: 쿠키 값
+initParam: 어플리케이션 초기화 파라미터 값
+EL은 다음과 같은 문법을 사용하여 객체에 접근함.
+
+${객체명.속성명}: 객체의 속성에 접근
+${객체명["속성명"]}: 객체의 속성에 접근
+${객체명.메소드명()}: 객체의 메소드를 호출
+${객체명"메소드명"}: 객체의 메소드를 호출
+${empty 객체}: 객체가 null인지 또는 빈 값이면 true 아니라면 false
+${not empty 객체}: 객체가 null이 아니거나 빈 값이면 true 아니라면 false
+${객체 ?: 기본값}: 객체가 null인 경우 기본값을 반환
+
+
+
+
+
++)
+flush를 사용하는 이유
+버퍼는 비워져 있지 않는 것이
+일반적이다.
+이를 비워주는 역할을 하는 키워드는 
+flush이다 flush는 버퍼의 데이터를 비워주는
+역할을 하는데 이는 결국 데이터 전송이
+빠르게 이루어진다.
+하지만 이는 처리 데이터 양이 적을 경우
+한정이고
+처리할 데이터가 방대하게 많을 경우
+네트워크 부하가 증가할 우려가 있다.
+
+곧 성능과 네트워크 부하 가능성을 고려하여
+적절히 사용하는 것을 권장
