@@ -16,6 +16,8 @@
 <body>
 	<h2>application 속성</h2>
 <%
+	
+
 	Map<String,Person> maps = (Map<String,Person>)application.getAttribute("maps");
 	for(Map.Entry<String,Person> e :maps.entrySet()){
 		String key = e.getKey();

@@ -18,10 +18,15 @@ MemberDTO dto = dao.getMember(userId, userPw);
 dao.close();
 
 if (dto.getId() != null) {
+	if(dto.getId().equals("SIBAL")){ 
+		request.setAttribute("loginErrMsg", "시발롬은 로그인도 밴임");
+		request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
+	}else{
 	session.setAttribute("UserId", dto.getId());
 	session.setAttribute("UserName", dto.getName());
 	response.sendRedirect("LoginForm.jsp");
-} else {
+	}
+}else {
 	request.setAttribute("loginErrMsg", "로그인 오류입니다.");
 	request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
 }
