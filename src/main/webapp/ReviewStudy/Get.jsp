@@ -5,7 +5,6 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-
 String name = request.getParameter("name");
 String age = request.getParameter("age");
 String job = request.getParameter("job");
@@ -18,6 +17,7 @@ String[] hobby = request.getParameterValues("hobby");
 <title>결과다</title>
 </head>
 <body>
+	<h2>${name }</h2>
 	<ul>
 		<li>이름:<%=name%></li>
 		<li>나이:<%=age%></li>

@@ -12,7 +12,7 @@
 		<welcome-file>default.jsp</welcome-file>
 		<welcome-file>default.htm</welcome-file>
 	</welcome-file-list>
-
+	
 	<context-param>
 		<param-name>INIT_PARAM</param-name>
 		<param-value>배포 서술자에 저장된 초기화 매개 변수</param-value>
@@ -33,7 +33,14 @@
 		<param-name>OraclePw</param-name>
 		<param-value>1234</param-value>
 	</context-param>
-
+	<context-param>
+		<param-name>PAGE_SIZE</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	<context-param>
+		<param-name>PAGING_BLOCK</param-name>
+		<param-value>5</param-value>
+	</context-param>
 	<error-page>
 		<error-code>404</error-code>
 		<location>/02ImplicitObject/Exception.jsp</location>
@@ -55,9 +62,38 @@
 			<param-value>utf-8</param-value>
 		</init-param>
 	</filter>
-	
 	<filter-mapping>
 		<filter-name>SetCharEncoding</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<servlet>
+		<servlet-name>FirstServlet</servlet-name>
+		<servlet-class>servlet.FirstServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FirstServlet</servlet-name>
+		<url-pattern>/13Servlet/FirstServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ServletView</servlet-name>
+		<servlet-class>servlet.ServletView</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletView</servlet-name>
+		<url-pattern>/ServletView.do</url-pattern>
+	</servlet-mapping>
+	
+<!-- 	<servlet>
+		<servlet-name>MemberAuth</servlet-name>
+		<servlet-class>servlet.MemberAuth</servlet-class>
+		<init-param>
+			<param-name>manager</param-name>
+			<param-value>ADMIN</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberAuth</servlet-name>
+		<url-pattern>/13Servlet/MemberAuth.mvc</url-pattern>
+	</servlet-mapping> -->
 </web-app>

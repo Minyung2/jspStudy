@@ -1,13 +1,11 @@
 package board;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import common.JDBConnect;
 
@@ -35,17 +33,20 @@ public class BoardDAO extends JDBConnect {
 
 		return totalCount;
 	}
-
+	
+	// 페이지별 게시물 내용 읽기
 	public List<BoardDTO> getList(Map<String, Object> param) {
 		List<BoardDTO> bl = new ArrayList<>();
-		String sql = "select * from board";
+		String sql = "SELECT * from(SELECT rownum pnum, s.* from(SELECT b.* FROM board b";
 		if (param.get("findWord") != null) {
 			sql += " where " + param.get("findCol") + " like '%" + param.get("findWord") + "%'";
 		}
-		sql += " order by num desc";
+		sql+=" ORDER BY num desc) s) WHERE pnum BETWEEN ? AND ?";
 		try {
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sql);
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, param.get("start").toString());
+			psmt.setString(2, param.get("end").toString());
+			rs = psmt.executeQuery();
 			while (rs.next()) {
 				BoardDTO dto = new BoardDTO();
 				dto.setNum(rs.getString("num"));
@@ -62,6 +63,22 @@ public class BoardDAO extends JDBConnect {
 
 		return bl;
 	}
+	
+	
+	/*
+	 * public List<BoardDTO> getList(Map<String, Object> param) { List<BoardDTO> bl
+	 * = new ArrayList<>(); String sql = "select * from board"; if
+	 * (param.get("findWord") != null) { sql += " where " + param.get("findCol") +
+	 * " like '%" + param.get("findWord") + "%'"; } sql += " order by num desc"; try
+	 * { stmt = con.createStatement(); rs = stmt.executeQuery(sql); while
+	 * (rs.next()) { BoardDTO dto = new BoardDTO(); dto.setNum(rs.getString("num"));
+	 * dto.setTitle(rs.getString("title")); dto.setContent(rs.getString("content"));
+	 * dto.setId(rs.getString("id")); dto.setPosdate(rs.getDate("posdate"));
+	 * dto.setVisitcount(rs.getString("visitcount")); bl.add(dto); } } catch
+	 * (SQLException e) { e.printStackTrace(); }
+	 * 
+	 * return bl; }
+	 */
 
 	// 게시물 작성
 	public int insertWrite(BoardDTO dto) {
