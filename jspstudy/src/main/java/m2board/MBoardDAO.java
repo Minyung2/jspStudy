@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import board.BoardDTO;
 import common.JDBConnPool;
 
 public class MBoardDAO extends JDBConnPool {
@@ -115,6 +114,23 @@ public class MBoardDAO extends JDBConnPool {
 		}
 	}
 
+	public int getDowncount(String idx) {
+		int downCount = 0;
+		String query = "SELECT DOWNCOUNT FROM FILEBOARD f WHERE IDX=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			rs = psmt.executeQuery();
+			rs.next();
+			downCount = rs.getInt(1);
+			System.out.println(rs.getInt(1));
+		} catch (SQLException e) {
+			System.out.println("다운로드 수 조회 중 에러");
+			e.printStackTrace();
+		}
+		return downCount;
+	}
+
 	public int insertWrite(MBoardDTO dto) {
 		int result = 0;
 		String query = "INSERT INTO fileboard(idx,name,title,CONTENT,OFILE,NFILE,PASS) values(seq_board_num.nextval,?,?,?,?,?,?)";
@@ -134,4 +150,56 @@ public class MBoardDAO extends JDBConnPool {
 		return result;
 	}
 
+	public int deletePost(String idx) {
+		int result = 0;
+		String query = "DELETE FROM FILEBOARD WHERE idx=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			result = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시물 삭제 중 에러");
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public boolean confirmPassword(String pass, String idx) {
+		boolean isRight = false;
+		String query = "SELECT count(*) FROM FILEBOARD WHERE pass=? AND idx=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, pass);
+			psmt.setString(2, idx);
+			rs = psmt.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 1) {
+				isRight = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("암호 검증 중 에러");
+			e.printStackTrace();
+		}
+		return isRight;
+	}
+
+	public int updatePost(MBoardDTO dto) {
+		int res = 0;
+		String query = "UPDATE FILEBOARD SET TITLE=?, NAME=?, CONTENT=?, OFILE=?, NFILE=? WHERE IDX=? AND PASS=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getName());			
+			psmt.setString(3, dto.getContent());			
+			psmt.setString(4, dto.getOfile());			
+			psmt.setString(5, dto.getNfile());			
+			psmt.setString(6, dto.getIdx());			
+			psmt.setString(7, dto.getPass());			
+			res = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("안됨");
+			e.printStackTrace();
+		}
+		return res;
+	}
 }

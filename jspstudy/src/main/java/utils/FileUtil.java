@@ -27,6 +27,7 @@ public class FileUtil {
 	public static void downloadFile(HttpServletRequest request, HttpServletResponse response, String directory, String saveFilename,
 			String originFilename) {
 		String saveDirectory = request.getServletContext().getRealPath(directory);
+
 		try {
 			File file=new File(saveDirectory,saveFilename);
 			InputStream inStream = new FileInputStream(file);
@@ -37,7 +38,6 @@ public class FileUtil {
 			}else{
 				originFilename = new String(originFilename.getBytes("KEC5601"), "ISO-8859-1");
 			}
-			
 			response.reset();
 			response.setContentType("application/octet-stream");
 			response.setHeader("Content-Disposition", "attachment; filename=\""+originFilename+"\"");
@@ -51,7 +51,7 @@ public class FileUtil {
 				outStream.write(b,0,readBuffer);
 			}
 			inStream.close();
-//			outStream.close();
+			outStream.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("파일 못 찾음");
@@ -60,5 +60,14 @@ public class FileUtil {
 			System.out.println("Exception!");
 		}
 	}
+	
 	// 파일 삭제
+	
+	public static void deleteFile(HttpServletRequest req, String directory, String saveFileName) {
+		String saveDirectory = req.getServletContext().getRealPath(directory);
+		File file = new File(saveDirectory+File.separator+saveFileName);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
 }

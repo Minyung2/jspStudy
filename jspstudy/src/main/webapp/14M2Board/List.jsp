@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>자료 게시판</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        
 <style type="text/css">
 a {
 	text-decoration: none;
@@ -17,7 +19,7 @@ a {
 	<h2>목록 보기</h2>
 	<!-- 검색 -->
 	<form method="get">
-		<table border="1" style="width: 90%;">
+		<table class="table-primary" border="1" style="width: 90%;">
 			<tr>
 				<td align="center"><select name="searchType">
 						<option value="title" <c:if test="${map.searchType=='title'}">selected</c:if>>제목</option>
@@ -45,8 +47,8 @@ a {
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="list" items="${boardList}" varStatus="stat">
-					<tr>
-						<td>${list.idx}</td>
+					<tr algin="center">
+						<td>${map.totalCount-((map.pageNum-1)*map.pageSize)-stat.index}</td>
 						<td align="center"><a
 							href="../m2board/view.do?idx=${list.idx}">${list.title}</a></td>
 						<td>${list.name}</td>
@@ -63,7 +65,7 @@ a {
 		</c:choose>
 	</table>
 	<!-- 하단 메뉴(페이징 글쓰기) -->
-	<table border="1" style="width: 90%;">
+	<table border="1" style="width: 90%; text-align:center">
 		<tr>
 			<td>${map.pagingStr}</td>
 			<td style="width: 100;">

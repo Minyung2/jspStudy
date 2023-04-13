@@ -10,18 +10,29 @@
 	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 	crossorigin="anonymous"></script>
 <script>
-	$(function(){
-		$('#downbtn').on('click',function(){
-			$.ajax({
-		        url: '../m2board/download.do',
-		        type: 'POST',
-		        data: {idx: '${dto.idx}'},
-		        success: function(count){
-		            $('#dcount').html(count);
-		        }
-		    });
-		});
-	});
+$(function(){
+    $('#downbtn').on('click',function(e){
+        e.preventDefault();
+        location.href='/m2board/download.do?ofile=${dto.ofile}&nfile=${dto.nfile}&idx=${dto.idx}';
+        $.ajax({
+            url: "/m2board/download.do", 
+            data: { 
+                idx:'${dto.idx}'
+            },                
+            type: "POST",
+            dataType: "text",
+            async: false
+        })
+        .done(function(data,textStatus){
+            console.log(data);
+            $('#dcount').html(data);
+        })
+        .fail(function(data,textStatus){
+            console.log('error',data,textStatus);
+        })
+    })
+})
+
 </script>
 </head>
 <body>
@@ -61,7 +72,7 @@
             ${dto.ofile}
             <a
 						href="../m2board/download.do?ofile=${dto.ofile}&nfile=${dto.nfile}&idx=${dto.idx}">[다운로드]</a>
-					<button type="button" id="downbtn">다운로드</button>
+					<button type="button" id="downbtn" >다운로드</button>
 				</c:if></td>
 			<td>다운로드수</td>
 			<td id="dcount">${dto.downcount}</td>

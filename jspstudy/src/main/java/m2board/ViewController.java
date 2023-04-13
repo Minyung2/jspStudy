@@ -18,6 +18,9 @@ public class ViewController extends HttpServlet{
 		String pageNum = req.getParameter("pageNum");
 		dao.updateVisitCount(idx);
 		MBoardDTO dto = dao.getView(idx);
+		dao.close();
+		
+		dto.setContent(dto.getContent().replaceAll("\r\n", "<br>"));
 		req.setAttribute("dto", dto);
 		req.setAttribute("pageNum", pageNum);
 		req.getRequestDispatcher("/14M2Board/View.jsp").forward(req, resp);	
