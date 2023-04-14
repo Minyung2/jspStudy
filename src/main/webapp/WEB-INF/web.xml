@@ -84,6 +84,16 @@
 		<url-pattern>/ServletView.do</url-pattern>
 	</servlet-mapping>
 	
+	<context-param>
+		<param-name>maxPostSize</param-name>
+		<param-value>1024000</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>CHAT_ADDR</param-name>
+		<param-value>ws://localhost:8081/</param-value>
+	</context-param>
+	
 <!-- 	<servlet>
 		<servlet-name>MemberAuth</servlet-name>
 		<servlet-class>servlet.MemberAuth</servlet-class>

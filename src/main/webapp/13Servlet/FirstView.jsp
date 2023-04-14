@@ -17,5 +17,8 @@
 		<li><a href="../Servlet/board.set">게시판</a></li>
 		
 	</ul>
+	<script type="text/javascript">
+			
+	</script>
 </body>
 </html>
