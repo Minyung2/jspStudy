@@ -9,6 +9,7 @@
 
 #headerbar {
 	position: fixed;
+	margin-bottom:100px;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -29,11 +30,16 @@ a.home {
 	top: 2%;
 	text-decoration: none;
 }
+.searchBar{
+	position : fixed;
+	left: 40%;
+	top : 5%;
+}
 
 .navMenu {
 	position: fixed;
-	top: 5%;
-	left: 30%;
+	top: 15%;
+	left: 45%;
 }
 
 .nav-links a {
@@ -71,7 +77,7 @@ a.home {
 	background-color: #aabb97;
 	margin: 5px;
 	transition: all 0.3s ease;
-	borer-radius: 2px;
+	border-radius: 2px;
 }
 
 .m-icon {

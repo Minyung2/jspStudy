@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="https://code.jquery.com/jquery-3.6.4.js"
+	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+	crossorigin="anonymous"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
@@ -15,9 +18,15 @@
 
 <header>
 	<div id="headerbar" onscroll="headerbarToggle()"></div>
-
-	<a class="home" href='home'>집에 보내조</a> <a class="m-icon"><ion-icon
-			name="person-outline"></ion-icon></a>
+	
+	<a class="home" href='home'>집에 보내조</a> <a class="m-icon"><ion-icon 	name="person-outline"></ion-icon></a>
+	<form action="#" method="get" class="searchBar">
+		<input type="text" id="searchRecipe"> 
+		<div id="suggestion_keyword">		
+		</div>
+		<input type="submit" value="돋보기">
+	</form>
+	<br><br><br>
 	<div>
 		<section class="log">
 			<c:if test="${member ==null }">
@@ -52,6 +61,32 @@
 
 </header>
 <script>
+$(function(){
+	var delayTimer;
+	$('#searchRecipe').on('keyup', function() {
+	  clearTimeout(delayTimer);
+	  delayTimer = setTimeout(function() {
+	    $.ajax({
+	      url: "/jspstudy/autoSearch.do",
+	      data: {
+	        name: $("#searchRecipe").val()
+	      },
+	      type: "GET"
+	    })
+	    .done(function(data, textStatus) {
+	      let temp = "<ul>";
+	      $.each(data.suggestions, function(key, value) {
+	        temp += "<li>" + value + "</li>";
+	      });
+	      temp += "</ul>";
+	      $('#suggestion_keyword').html(temp);
+	    })
+	    .fail(function(data, textStatus) {
+	      console.log('error', data, textStatus);
+	    })
+	  }, 500); // 500ms 이후에 요청을 보냄
+	});
+})
 	//HeaderToggle
 	var prevScrollPos = window.pageYOffset;
 	console.log("first Y offset: " + prevScrollPos) //first value : 0
