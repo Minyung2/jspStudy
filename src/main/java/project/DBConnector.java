@@ -23,7 +23,6 @@ public class DBConnector {
 			DataSource source = (DataSource)ctx.lookup("dbcp_mysql");
 			
 			con=source.getConnection();
-			System.out.println("DB CP connect success");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("DB CP connect fail");
