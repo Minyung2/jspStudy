@@ -11,57 +11,103 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
+<link rel="styleSheet" href="../projectResources/css/RecipeInsert.css">
 <script>
 	
 </script>
 </head>
 <body>
 	<div class="insert_form">
+	<form action="../project/recipeWrite.do" method="post">
 		<div class="insert_form_title">
 			<b>레시피 등록</b>
 		</div>
 		<div class="insert_summary">
 			<div class="summary_title">
 				레시피 제목 <input type="text" style="width: 610px;"
-					placeholder="예 ) 소고기 미역국 끓이기">
+					placeholder="예 ) 소고기 미역국 끓이기" name="recipe_name">
 			</div>
 			<div class="summary_describe">
-				요리 소개 <input type="text"
+				요리 소개 <textarea name="recipe_desc"
 					style="height: 100px; width: 610px; resize: none;"
-					placeholder="이 레시피의 탄생배경을 적어주세요. 예) 남편의 생일을 맞아 소고기 미역국을 끓여봤어요. 어머니로부터 배운 미역국 레시피를 남편의 입맛에 맞게 고안했습니다.">
+					placeholder="이 레시피의 탄생배경을 적어주세요. 예) 남편의 생일을 맞아 소고기 미역국을 끓여봤어요. 어머니로부터 배운 미역국 레시피를 남편의 입맛에 맞게 고안했습니다."></textarea>
 			</div>
 			<div class="summary_category">
-				<b>카테고리</b> <select name="select_category_4" id="select_category_4">
+				<b>카테고리</b> <select name="select_category_1" id="select_category_1">
 					<optgroup>
 						<option>종류별</option>
 						<option value="1">밑반찬</option>
 						<option value="2">메인반찬</option>
-						<option value="3">어저구</option>
-						<option value="4">저쩌구</option>
+						<option value="3">국/탕</option>
+						<option value="4">찌개</option>
+						<option value="5">디저트</option>
+						<option value="6">면/만두</option>
+						<option value="7">밥/죽/떡</option>
+						<option value="8">퓨전</option>
+						<option value="9">김치/젓갈/장류</option>
+						<option value="10">양념/소스/잼</option>
+						<option value="11">양식</option>
+						<option value="12">샐러드</option>
+						<option value="13">스프</option>
+						<option value="14">빵/과자</option>
+						<option value="15">차/음료/술</option>
+						<option value="16">기타</option>
 					</optgroup>
-				</select> <select name="select_category_3" id="select_category_3">
+				</select> <select name="select_category_2" id="select_category_2">
 					<optgroup>
 						<option>상황별</option>
 						<option value="1">일상</option>
-						<option value="2">단백질</option>
-						<option value="3">헬창</option>
-						<option value="4">근손실방지</option>
+						<option value="2">초스피드</option>
+						<option value="3">손님접대</option>
+						<option value="4">술안주</option>
+						<option value="5">다이어트</option>
+						<option value="6">도시락</option>
+						<option value="7">영양식</option>
+						<option value="8">간식</option>
+						<option value="9">야식</option>
+						<option value="10">푸드스타일링</option>
+						<option value="11">해장</option>
+						<option value="12">명절</option>
+						<option value="13">이유식</option>
+						<option value="14">기타</option>
 					</optgroup>
-				</select> <select name="select_category_2" id="select_category_2">
+				</select> <select name="select_category_3" id="select_category_3">
 					<optgroup>
 						<option>방법별</option>
 						<option value="1">볶음</option>
 						<option value="2">끓이기</option>
 						<option value="3">부침</option>
-						<option value="4">근육조지기</option>
+						<option value="4">조림</option>
+						<option value="5">무침</option>
+						<option value="6">비빔</option>
+						<option value="7">찜</option>
+						<option value="8">절임</option>
+						<option value="9">튀김</option>
+						<option value="10">삶기</option>
+						<option value="11">굽기</option>
+						<option value="12">데치기</option>
+						<option value="13">회</option>
+						<option value="14">기타</option>
 					</optgroup>
-				</select> <select name="select_category_1" id="select_category_1">
+				</select> <select name="select_category_4" id="select_category_4">
 					<optgroup label="재료별">
 						<option>재료별</option>
 						<option value="1">소고기</option>
 						<option value="2">돼지고기류</option>
-						<option value="3">단백질류</option>
-						<option value="4">프로틴류</option>
+						<option value="3">닭류</option>
+						<option value="4">육류</option>
+						<option value="5">채소류</option>
+						<option value="6">해물류</option>
+						<option value="7">달걀/유제품</option>
+						<option value="8">가공식품류</option>
+						<option value="9">쌀</option>
+						<option value="10">밀가루</option>
+						<option value="11">건어물류</option>
+						<option value="12">버셧류</option>
+						<option value="13">과일류</option>
+						<option value="14">콩/견과류</option>
+						<option value="15">곡류</option>
+						<option value="16">기타</option>
 					</optgroup>
 				</select>
 			</div>
@@ -70,37 +116,37 @@
 				<p>
 					<b>요리정보</b>
 				</p>
-				인원 <select name="select_info_1" id="select_info_1">
+				인원 <select name="recipe_amount" id="select_info_1">
 					<optgroup label="인원">
 						<option>인원</option>
-						<option value="1">1인분</option>
-						<option value="2">2인분</option>
-						<option value="3">3인분</option>
-						<option value="4">4인분</option>
-						<option value="5">5인분</option>
-						<option value="6">6인분 이상</option>
+						<option value="1인분">1인분</option>
+						<option value="2인분">2인분</option>
+						<option value="3인분">3인분</option>
+						<option value="4인분">4인분</option>
+						<option value="5인분">5인분</option>
+						<option value="6인분">6인분 이상</option>
 					</optgroup>
-				</select> 시간 <select name="select_info_2" id="select_info_2">
+				</select> 시간 <select name="recipe_cooking_time" id="select_info_2">
 					<optgroup label="시간">
 						<option>시간</option>
-						<option value="1">5분 이내</option>
-						<option value="2">10분 이내</option>
-						<option value="3">15분 이내</option>
-						<option value="4">20분 이내</option>
-						<option value="5">30분 이내</option>
-						<option value="6">60분 이내</option>
-						<option value="7">90분 이내</option>
-						<option value="8">2시간 이내</option>
-						<option value="9">2시간 이상</option>
+						<option value="5분 이내">5분 이내</option>
+						<option value="10분 이내">10분 이내</option>
+						<option value="15분 이내">15분 이내</option>
+						<option value="20분 이내">20분 이내</option>
+						<option value="30분 이내">30분 이내</option>
+						<option value="60분 이내">60분 이내</option>
+						<option value="90분 이내">90분 이내</option>
+						<option value="2시간 이내">2시간 이내</option>
+						<option value="2시간 이상">2시간 이상</option>
 					</optgroup>
-				</select> 난이도 <select name="select_info_3" id="select_info_3">
+				</select> 난이도 <select name="recipe_difficulty" id="select_info_3">
 					<optgroup label="난이도">
 						<option>난이도</option>
-						<option value="1">아무나</option>
-						<option value="2">초급</option>
-						<option value="3">중급</option>
-						<option value="4">고급</option>
-						<option value="5">신의 경지</option>
+						<option value="아무나">아무나</option>
+						<option value="초급">초급</option>
+						<option value="중급">중급</option>
+						<option value="고급">고급</option>
+						<option value="신의 경지">신의 경지</option>
 
 					</optgroup>
 				</select>
@@ -113,32 +159,45 @@
 			<span style="width: 100%;">재료가 남거나 부족하지 않도록 정확한 계량정보를 적어주세요.</span>
 			<div class="ingredient_group_div">
 				<li style="list-style-type: none;">
-					<p>
+					<!-- <p>
 						<input type="text" name="ingredient_group_title_1" value="재료"
 							style="font-weight: bold; font-size: 18px; width: 210px;"/>
-					</p>
+					</p> -->
 					<ul id="ingredient_group_list">
-						<li style="list-style-type: none" id="ingredient_text_list1">
-							<input type="text" style="width: 200px;" placeholder="예)돼지고기"></input> 
-							<input type="text" style="width: 200px;" placeholder="예)300g"></input>
+						<li class="ingreTextList" id="ingredient_text_list1">
+							<input name="ingredient_name[]" type="text" class="ingreInput" placeholder="예)돼지고기"></input> 
+							<input name="ingredient_amount[]" type="text" class="ingreInput"  placeholder="예)300g"></input>
+							<img id="ingredient_text_list1_delBtn" class="ingreDelBtn" src="../projectResources/img/x-mark.png">
 						</li>
-						<li style="list-style-type: none" id="ingredient_text_list2">
-							<input type="text" style="width: 200px;" placeholder="예)양배추"></input> 
-							<input type="text" style="width: 200px;" placeholder="예)1/2개"></input>
+						<li class="ingreTextList" id="ingredient_text_list2">
+							<input name="ingredient_name[]" type="text" class="ingreInput" placeholder="예)양배추"></input> 
+							<input name="ingredient_amount[]" type="text" class="ingreInput" placeholder="예)1/2개"></input>
+							<img id="ingredient_text_list2_delBtn" class="ingreDelBtn" src="../projectResources/img/x-mark.png">
 						</li>
-						<li style="list-style-type: none" id="ingredient_text_list3"> 
-							<input type="text" style="width: 200px;" placeholder="예)참기름"></input> 
-							<input type="text" style="width: 200px;" placeholder="예)1T"></input>
+						<li class="ingreTextList" id="ingredient_text_list3"> 
+							<input name="ingredient_name[]" type="text" class="ingreInput" placeholder="예)참기름"></input> 
+							<input name="ingredient_amount[]" type="text" class="ingreInput" placeholder="예)1T"></input>
+							<img id="ingredient_text_list3_delBtn" class="ingreDelBtn" src="../projectResources/img/x-mark.png">
+						</li>
+						<li class="ingreTextList" id="ingredient_text_list4"> 
+							<input name="ingredient_name[]" type="text" class="ingreInput" placeholder="예)소금"></input> 
+							<input name="ingredient_amount[]" type="text" class="ingreInput" placeholder="예)1/4T"></input>
+							<img id="ingredient_text_list4_delBtn" class="ingreDelBtn" src="../projectResources/img/x-mark.png">
 						</li>
 					</ul>
+					<div style="padding-left:12%">
+					<button type="button" id="addIngredientGroup" class="btn btn-outline-success">추가</button>
+					</div>
 				</li>
 			</div>
 		</div>
 		<div class="add_ingredient_group">
 			<span>※ 양념, 양념장, 소스, 드레싱, 토핑, 시럽, 육수 밑간 등으로 구분해서 작성해주세요.</span><br>
-			<button type="button" id="addIngredientGroup">재료/양념 추가</button>
+			
 		</div>
 		<br><br>
+		
+		
 		<div class="recipe_step_form">
 			<div class="recipe_step_title">
 				<input type="file" name="file" id="multifile_1" file_gubun="step" style="display: none;" multiple="">
@@ -153,16 +212,36 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;꿀을 조금 넣어주세요 ▷ 꿀이 없는 경우, 설탕 1스푼으로 대체 가능합니다.
 	  			</span>
 			</div>
-			<div class="recipe_stpe_detail">
-				<p>Step1</p>
-				<textarea placeholder="씨발 개어려웡"></textarea>
-				<img id="stepPhotoHolder_1" onclick="browseStepFile(1)" src="" width="160" height="160" style="cursor:pointer">
+			<div class="recipe_step_detail">
+				<br>
+				<div class="row step_row">
+					<div class="step_div" id="step_div1">
+						<p class="step_p">🔻</p>
+						<div id="step_div_text1">
+							<textarea name="step_text[]" class="form-control step_cont" placeholder="예) 소고기는 기름기를 떼어내고 적당한 크기로 썰어주세요."></textarea>
+						</div>
+						<div id="step_div_photo1">
+							<img id="step_img_photo1" class="stepDivPhoto" src="../projectResources/img/imageAdd.png">
+  							<input type="file" name="fileUpload" class="fileUpload" id="fileUpload1" style="display: none;">
+  						</div>
+  										
+  						<img id="step_div_text1_delBtn" class="stepDelBtn" src="../projectResources/img/file-x.svg">
+  						<br>
+					</div>
+				</div>
+				<div style="padding-left: 15%">
+					<button type="button" class="btn btn-outline-primary" id="addStepDetailGroup" style="border: 1px solid grey">순서 추가</button>
+				</div>
 			</div>
 			<br>
-			<div class="recipe_step_donePhotos">
+			
+			
+			<br>
+			<!-- <div class="recipe_step_donePhotos">
 				<p style="font-weight: bold; font-size: 15px">요리 완성 사진</p>
-				<img id="stepPhotoHolder_1" onclick="StepDoneFile(1)" src="" width="160" height="160" style="cursor:pointer">
-			</div>
+				<img src="../projectResources/img/imageAdd.png" id="stepPhotoHolder_1" onclick="uploadFile()" src="" width="120" height="120" style="cursor:pointer">
+				
+			</div> -->
 		</div>
 		
 		<div class="recipe_tips">
@@ -171,48 +250,11 @@
 		
 		<button type="submit">저장</button>
 		<button type="reset">초기화</button>
-		<button tpye="button" onclick="">취소</button>
+		<button type="button" onclick="">취소</button>
+		</form>
 	</div> 
 	
-	<script>
-	var ingredients = [
-	    {
-	        name: "돼지고기",
-	        amount: "300g"
-	    },
-	    {
-	        name: "양배추",
-	        amount: "1/2개"
-	    },
-	    {
-	        name: "참기름",
-	        amount: "1T"
-	    },
-	    {
-	        name: "소금",
-	        amount: "1/4T"
-	    }
-	];
-	var currentIngredientIndex = 0; // 현재 표시할 ingredients 배열의 인덱스
-	var currentIdIndex = 4; // 현재 부여할 id 값의 시작 인덱스
+	<script src="../projectResources/javascript/Insert.js"></script>
 
-	$(function(){
-	    $('#addIngredientGroup').on('click',function(){
-	        // ingredients 배열에서 현재 인덱스의 name과 amount 값을 가져와 placeholder에 대입
-	        var currentIngredient = ingredients[currentIngredientIndex];
-	        var newListItem = $('<li style="list-style-type: none"><input type="text" style="width: 200px;" placeholder="예)' + currentIngredient.name + '"></input> <input type="text" style="width: 200px;" placeholder="예)' + currentIngredient.amount + '"></input></li>');
-	        
-	        // id 값 부여
-	        newListItem.attr('id', 'ingredient_text_list' + currentIdIndex);
-	        currentIdIndex++;
-	        
-	        $('#ingredient_group_list').append(newListItem);
-	        
-	        // 다음에 대입할 인덱스 계산
-	        currentIngredientIndex = (currentIngredientIndex + 1) % ingredients.length;
-	    });
-	});
-	
-	</script>
 </body>
 </html>

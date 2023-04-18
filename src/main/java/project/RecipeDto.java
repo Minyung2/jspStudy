@@ -2,6 +2,7 @@ package project;
 
 public class RecipeDto {
 	private String recipe_id;
+	private String user_idx;
 	private String recipe_name;
 	private String recipe_desc;
 	private String amount_portion;
@@ -10,6 +11,15 @@ public class RecipeDto {
 	private String image_url;
 	public String getRecipe_id() {
 		return recipe_id;
+	}
+	
+	
+	
+	public String getUser_idx() {
+		return user_idx;
+	}
+	public void setUser_idx(String user_idx) {
+		this.user_idx = user_idx;
 	}
 	public void setRecipe_id(String recipe_id) {
 		this.recipe_id = recipe_id;

@@ -9,12 +9,12 @@ public class RecipeDao extends DBConnector {
 		super();
 	}
 
-	public RecipeDto detailView(String idx) {
+	public RecipeDto detailView(String recipe_id) {
 		RecipeDto dto = new RecipeDto();
 		String sql = "select * from recipe_test where recipe_id=?";
 		try {
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, idx);
+			psmt.setString(1, recipe_id);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				dto.setRecipe_id(rs.getString("recipe_id"));
@@ -46,5 +46,41 @@ public class RecipeDao extends DBConnector {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public int insertRecipe(RecipeDto dto) {
+		int result = 0;
+		String sql = "insert into recipe_test (user_idx,recipe_name,recipe_desc,amount_portion,cooking_time,difficulty,image_url) values(?,?,?,?,?,?,?)";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, dto.getUser_idx());
+			psmt.setString(2, dto.getRecipe_name());
+			psmt.setString(3, dto.getRecipe_desc());
+			psmt.setString(4, dto.getAmount_portion());
+			psmt.setString(5, dto.getCooking_time());
+			psmt.setString(6, dto.getDifficulty());
+			psmt.setString(7, dto.getImage_url());
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("실패");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	public String getLastRecipeId() {
+		String lastIndex = "";
+		String sql = "SELECT recipe_id FROM recipe_test WHERE recipe_id = (SELECT MAX(recipe_id) FROM recipe_test)";
+		try {
+			psmt=con.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if(rs.next()) 
+			lastIndex=rs.getString("recipe_id");
+		}catch (Exception e) {
+			System.out.println("게시글 마지막 index 조회중 DB 에러");
+			e.printStackTrace();
+		}
+		return lastIndex;
 	}
 }

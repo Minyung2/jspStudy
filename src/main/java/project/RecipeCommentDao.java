@@ -8,7 +8,7 @@ public class RecipeCommentDao extends DBConnector {
 		super();
 	}
 
-	public int getRatingCount(String recipe_id) {
+	public int getCommentCount(String recipe_id) {
 		int count=0;
 		String sql= "select count(*) from recipe_comment where recipe_id=?";
 		try {
@@ -46,6 +46,22 @@ public class RecipeCommentDao extends DBConnector {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public int writeComment(RecipeCommentDto dto) {
+		int result=0;
+		String sql="insert into recipe_comment(recipe_id,user_idx,comment_content) values(?,?,?)";
+		try {
+			psmt=con.prepareStatement(sql);
+			psmt.setString(1,dto.getRecipe_id());
+			psmt.setString(2,dto.getUser_idx());
+			psmt.setString(3,dto.getComment_content());
+			result=psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("댓글 INSERT 중 DB 에러");
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

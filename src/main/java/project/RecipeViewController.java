@@ -28,7 +28,7 @@ public class RecipeViewController extends HttpServlet{
 		List<RecipeRatingDto> ratingList = ratingDao.detailView(recipe_id);
 		int ratingCount = ratingDao.getRatingCount(recipe_id);
 		List<RecipeCommentDto> commentList = commentDao.detailView(recipe_id);
-		int commentCount = commentDao.getRatingCount(recipe_id);
+		int commentCount = commentDao.getCommentCount(recipe_id);
 		
 		req.setAttribute("recipeDto", recipeDto);
 		req.setAttribute("ingreList", ingreList);

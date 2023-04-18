@@ -39,7 +39,7 @@ public class RecipeRatingDao extends DBConnector {
 				dto.setUser_idx(rs.getString("user_idx"));
 				dto.setRating(rs.getString("rating"));
 				dto.setRating_content(rs.getString("rating_content"));
-				dto.setRating_date(rs.getDate("rating_date"));
+				dto.setRating_date(rs.getTimestamp("rating_date"));
 				dto.setUser_nickname(rs.getString("user_nickname"));
 				list.add(dto);
 			}

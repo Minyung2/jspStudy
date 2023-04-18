@@ -1,6 +1,7 @@
 package project;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 public class RecipeRatingDto {
 	private String rating_id;
@@ -9,7 +10,7 @@ public class RecipeRatingDto {
 	private String user_nickname;
 	private String rating;
 	private String rating_content;
-	private Date rating_date;
+	private Timestamp rating_date;
 	
 	
 	
@@ -49,18 +50,13 @@ public class RecipeRatingDto {
 	public void setRating_content(String rating_content) {
 		this.rating_content = rating_content;
 	}
-	public Date getRating_date() {
+	public Timestamp getRating_date() {
 		return rating_date;
 	}
-	public void setRating_date(Date rating_date) {
+	public void setRating_date(Timestamp rating_date) {
 		this.rating_date = rating_date;
 	}
-	@Override
-	public String toString() {
-		return "RecipeRatingDto [rating=" + rating + ", rating_content=" + rating_content + ", rating_date="
-				+ rating_date + ", rating_id=" + rating_id + ", recipe_id=" + recipe_id + ", user_idx=" + user_idx
-				+ "]";
-	}
+
 	
 	
 }
